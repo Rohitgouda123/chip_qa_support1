@@ -1,46 +1,26 @@
-- testcase: "[TC-LUNIT-1.2|]Global Attributes [DUT as Server]"
-  commands:
-    - command: "./chip-tool unitlocalization read  cluster-revision 1 0"
-      logs:
-        - " "
-    - command: "./chip-tool unitlocalization read  feature-map 1 0"
-      logs:
-        - " "
-    - command: "./chip-tool unitlocalization read attribute-list 1 0"
-      logs:
-        - " "
-    - command: "./chip-tool unitlocalization read event-list 1 0"
-      logs:
-        - " "
-    - command: "./chip-tool unitlocalization read accepted-command-list 1 0"
-      logs:
-        - " "
-    - command: "./chip-tool unitlocalization read generated-command-list 1 0"
-      logs:
-        - " "
 - testcase: "[TC-LUNIT-3.1] Read and Write Unit Localization Cluster Attributes [{DUT_Server}]"
   commands:
     - command: "./chip-tool unitlocalization read temperature-unit 1 0"
-      logs:
-        - " "
+      logs: >
+            Data = 0 (unsigned),
     - command: "./chip-tool unitlocalization write temperature-unit 0 1 0"
-      logs:
-        - " "
+      logs: >
+            status = 0x00 (SUCCESS),
     - command: "./chip-tool unitlocalization read temperature-unit 1 0"
-      logs:
-        - " "
+      logs: >
+            Data = 0 (unsigned),
     - command: "./chip-tool unitlocalization write temperature-unit 1 1 0"
-      logs:
-        - " "
+      logs: >
+            status = 0x00 (SUCCESS),
     - command: "./chip-tool unitlocalization read temperature-unit 1 0"
-      logs:
-        - " "
+      logs: >
+            Data = 1 (unsigned),
     - command: "./chip-tool unitlocalization write temperature-unit 2 1 0"
-      logs:
-        - " "
+      logs: >
+            status = 0x00 (SUCCESS),
     - command: "./chip-tool unitlocalization read temperature-unit 1 0"
-      logs:
-        - " "
+      logs: >
+            Data = 2 (unsigned),
     - command: "./chip-tool unitlocalization write temperature-unit 5 1 0"
-      logs:
-        - " "
+      logs: >
+            status = 0x87 (CONSTRAINT_ERROR),

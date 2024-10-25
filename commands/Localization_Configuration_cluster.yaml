@@ -1,40 +1,33 @@
-- testcase: "[TC-LCFG-1.1]Global Attributes [DUT-Server]"
-  commands:
-    - command: "./chip-tool localizationconfiguration read cluster-revision 1 0"
-      logs:
-        - " "
-    - command: "./chip-tool localizationconfiguration read feature-map 1 0"
-      logs:
-        - " "
-    - command: "./chip-tool localizationconfiguration read  attribute-list 1 0"
-      logs:
-        - " "
-    - command: "./chip-tool localizationconfiguration read accepted-command-list 1 0"
-      logs:
-        - " "
-    - command: "./chip-tool localizationconfiguration read  generated-command-list 1 0"
-      logs:
-        - " "
 - testcase: "[TC-LCFG-2.1] Localization Configuration Cluster Attributes"
   commands:
     - command: "./chip-tool localizationconfiguration read supported-locales 1 0"
-      logs:
-        - " "
+      logs: >
+        Data = [
+          "en-US" (5 chars), "de-DE" (5 chars), "fr-FR" (5 chars), "en-GB" (5 chars), "es-ES" (5 chars), "zh-CN" (5 chars), "it-IT" (5 chars), "ja-JP" (5 chars),
+        ],
+
     - command: "./chip-tool any write-by-id 0x002B 1 '\"xx-XX\"' 1 0"
-      logs:
-        - " "
+      logs: >
+        status = 0x88 (UNSUPPORTED_WRITE),
+
     - command: "./chip-tool localizationconfiguration read supported-locales 1 0"
-      logs:
-        - " "
+      logs: >
+        Data = [
+          "en-US" (5 chars), "de-DE" (5 chars), "fr-FR" (5 chars), "en-GB" (5 chars), "es-ES" (5 chars), "zh-CN" (5 chars), "it-IT" (5 chars), "ja-JP" (5 chars),
+        ],
+
     - command: "./chip-tool localizationconfiguration read active-locale 1 0"
-      logs:
-        - " "
+      logs: >
+        Data = "en-US" (5 chars),
+
     - command: "./chip-tool localizationconfiguration write active-locale fw-GB 1 0"
-      logs:
-        - " "
+      logs: >
+        status = 0x87 (CONSTRAINT_ERROR),
+
     - command: "./chip-tool localizationconfiguration write active-locale fr-FR 1 0"
-      logs:
-        - " "
+      logs: >
+        status = 0x00 (SUCCESS),
+
     - command: "./chip-tool localizationconfiguration read active-locale 1 0"
-      logs:
-        - " "
+      logs: >
+        Data = "fr-FR" (5 chars),

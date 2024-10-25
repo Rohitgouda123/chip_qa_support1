@@ -1,31 +1,49 @@
-- testcase: "[TC-FLABEL-1.1] Global Attributes [DUT-server]"
-  commands:
-    - command: "./chip-tool fixedlabel read cluster-revision 1 0"
-      logs:
-        - " "
-    - command: "./chip-tool fixedlabel read feature-map 1 0"
-      logs:
-        - " "
-    - command: "./chip-tool fixedlabel read attribute-list 1 0"
-      logs:
-        - " "
-    - command: "./chip-tool fixedlabel read event-list 1 0"
-      logs:
-        - " "
-    - command: "./chip-tool fixedlabel read accepted-command-list 1 0"
-      logs:
-        - " "
-    - command: "./chip-tool fixedlabel read generated-command-list 1 0"
-      logs:
-        - " "
 - testcase: "[TC-FLABEL-2.1] Fixed Label cluster [DUT-server]"
   commands:
     - command: "./chip-tool fixedlabel read label-list 1 0"
-      logs:
-        - " "
-    - command: "./chip-tool fixedlabel write-by-id  0x00 '[\"label\",\"Testlabel\", \"value\",\"testvalue\"]' 1 0"
-      logs:
-        - " "
+      logs: >
+              Data = [
+
+                {
+                  0x0 = "room" (4 chars),
+                  0x1 = "bedroom 2" (9 chars),
+                },
+                {
+                  0x0 = "orientation" (11 chars),
+                  0x1 = "North" (5 chars),
+                },
+                {
+                  0x0 = "floor" (5 chars),
+                  0x1 = "2" (1 chars),
+                },
+                {
+                  0x0 = "direction" (9 chars),
+                  0x1 = "up" (2 chars),
+                },
+              ],
+
+    - command: "./chip-tool fixedlabel write-by-id 0x00 '[\"label\",\"Testlabel\", \"value\",\"testvalue\"]' 1 0"
+      logs: >
+            status = 0x88 (UNSUPPORTED_WRITE),
+
     - command: "./chip-tool fixedlabel read label-list 1 0"
-      logs:
-        - " "
+      logs: >
+              Data = [
+
+                {
+                  0x0 = "room" (4 chars),
+                  0x1 = "bedroom 2" (9 chars),
+                },
+                {
+                  0x0 = "orientation" (11 chars),
+                  0x1 = "North" (5 chars),
+                },
+                {
+                  0x0 = "floor" (5 chars),
+                  0x1 = "2" (1 chars),
+                },
+                {
+                  0x0 = "direction" (9 chars),
+                  0x1 = "up" (2 chars),
+                },
+              ],
